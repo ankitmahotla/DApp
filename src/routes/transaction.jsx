@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const Transactions = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [amount, setAmount] = useState("");
+  const [disableSubmit, setDisableSubmit] = useState(false);
 
   // Store transaction in Firestore
   const storeTransaction = async (walletAddress, amount) => {
@@ -27,6 +28,10 @@ export const Transactions = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDisableSubmit(true);
+    setTimeout(() => {
+      setDisableSubmit(false);
+    }, 5000);
     if (!walletAddress || !ethers.isAddress(walletAddress)) {
       toast.error("Please enter a valid Ethereum wallet address.");
       return;
@@ -85,7 +90,7 @@ export const Transactions = () => {
         <button
           type="submit"
           className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 disabled:opacity-50"
-          disabled={!walletAddress || !amount}
+          disabled={!walletAddress || !amount || disableSubmit}
         >
           Submit
         </button>
