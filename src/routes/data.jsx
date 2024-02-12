@@ -2,6 +2,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { useState, useEffect, useMemo } from "react";
 import { db } from "../../firebaseConfig";
 import DataTable from "../components/DataTable";
+import TableSkeleton from "../components/TableSkeleton";
 
 export const Data = () => {
   const [transactions, setTransactions] = useState([]);
@@ -49,10 +50,16 @@ export const Data = () => {
   // Memoize DataTable component
   const memoizedDataTable = useMemo(() => {
     return (
-      <DataTable
-        transactions={currentTransactions}
-        indexOfFirstItem={indexOfFirstItem}
-      />
+      <>
+        {currentTransactions.length > 0 ? (
+          <DataTable
+            transactions={currentTransactions}
+            indexOfFirstItem={indexOfFirstItem}
+          />
+        ) : (
+          <div className="text-lg text-gray-400">Not Found</div>
+        )}
+      </>
     );
   }, [currentTransactions]);
 
@@ -102,7 +109,26 @@ export const Data = () => {
           </table>
         ) : (
           // Show loading state
-          <p>Loading...</p>
+          <table className="w-full border-separate border-spacing-0 border-spacing-y-0.5 caption-bottom text-sm">
+            <thead className="[&amp;_tr]:border-b">
+              <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[100px]">
+                  ID
+                </th>
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                  Wallet Address
+                </th>
+                <th className="h-12 px-4 align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 text-right">
+                  Amount
+                </th>
+              </tr>
+            </thead>
+            <tbody className="[&amp;_tr:last-child]:border-0">
+              {Array.from({ length: 5 }).map((_, index) => (
+                <TableSkeleton key={index} />
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
       {/* Pagination */}
