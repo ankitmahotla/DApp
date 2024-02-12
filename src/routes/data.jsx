@@ -49,11 +49,62 @@ export const Data = () => {
   // Function to handle page change
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  if (loading) return <p>Loading...</p>;
-
   return (
-    <div>
-      {memoizedDataTable}
+    <>
+      <div className="relative mx-auto max-w-5xl overflow-auto mt-4 md:mt-10">
+        {!loading ? (
+          <table className="w-full border-separate border-spacing-0 border-spacing-y-0.5 caption-bottom text-sm">
+            <thead className="[&amp;_tr]:border-b">
+              <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[100px]">
+                  ID
+                </th>
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                  Wallet Address
+                </th>
+                <th className="h-12 px-4 align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 text-right">
+                  Amount
+                </th>
+              </tr>
+            </thead>
+            <tbody className="[&amp;_tr:last-child]:border-0">
+              {Array.from({ length: 5 }).map((_, index) => (
+                <>
+                  <tr className="animate-pulse border-spacing-2">
+                    <td className="h-10 px-4 text-left align-middle bg-slate-300"></td>
+                    <td className="h-10 px-4 text-left align-middle bg-slate-300"></td>
+                    <td className="h-10 px-4 text-left align-middle bg-slate-300"></td>
+                  </tr>
+                  <tr className="animate-pulse border-spacing-2">
+                    <td className="h-10 px-4 text-left align-middle bg-slate-200"></td>
+                    <td className="h-10 px-4 text-left align-middle bg-slate-200"></td>
+                    <td className="h-10 px-4 text-left align-middle bg-slate-200"></td>
+                  </tr>
+                </>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <table className="w-full caption-bottom text-sm">
+            <thead className="[&amp;_tr]:border-b">
+              <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 w-[100px]">
+                  ID
+                </th>
+                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0">
+                  Wallet Address
+                </th>
+                <th className="h-12 px-4 align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 text-right">
+                  Amount
+                </th>
+              </tr>
+            </thead>
+            <tbody className="[&amp;_tr:last-child]:border-0">
+              {memoizedDataTable}
+            </tbody>
+          </table>
+        )}
+      </div>
       {/* Pagination */}
       <div className="flex justify-center mt-4">
         {Array.from({
@@ -72,6 +123,6 @@ export const Data = () => {
           </button>
         ))}
       </div>
-    </div>
+    </>
   );
 };
