@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <section className="mx-auto max-w-5xl py-12 md:py-24 lg:py-32">
+    <section className="mx-auto max-w-3xl lg:max-5xl py-12 md:py-24 lg:py-32">
       <div className="container flex flex-col items-center justify-center gap-4 px-4 text-center md:gap-10 md:px-6">
         <div className="space-y-3">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
