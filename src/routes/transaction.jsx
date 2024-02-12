@@ -4,11 +4,13 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 export const Transactions = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [disableSubmit, setDisableSubmit] = useState(false);
+  const navigate = useNavigate();
 
   // Store transaction in Firestore
   const storeTransaction = async (walletAddress, amount) => {
@@ -18,7 +20,11 @@ export const Transactions = () => {
         amount,
       });
       console.log("Transaction added with ID: ", docRef.id);
-      toast.success("Transaction added successfully");
+      toast.success("Transaction added successfully", { autoClose: 2000 });
+      toast.info("Redirecting to Transaction Data Page", { autoClose: 2000 });
+      setTimeout(() => {
+        navigate("/data");
+      }, 2000);
     } catch (e) {
       console.error("Error adding transaction: ", e);
       toast.error("Failed to add transaction");
