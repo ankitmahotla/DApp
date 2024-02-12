@@ -52,7 +52,7 @@ export const Data = () => {
   return (
     <>
       <div className="relative mx-auto max-w-5xl overflow-auto mt-4 md:mt-10">
-        {!loading ? (
+        {loading ? (
           <table className="w-full border-separate border-spacing-0 border-spacing-y-0.5 caption-bottom text-sm">
             <thead className="[&amp;_tr]:border-b">
               <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
