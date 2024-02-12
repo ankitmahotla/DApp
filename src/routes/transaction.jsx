@@ -31,13 +31,18 @@ export const Transactions = () => {
       toast.error("Please enter a valid Ethereum wallet address.");
       return;
     }
-    if (
-      isNaN(amount) ||
-      parseFloat(amount) <= 0 ||
-      parseFloat(amount) > 10000
-    ) {
+    if (parseFloat(amount) <= 0 || parseFloat(amount) > 10000) {
       toast.error("Please enter a valid amount between 0 and 10,000.");
       return;
+    }
+    if (amount.includes(".")) {
+      const decimalCount = amount.split(".")[1].length;
+      if (decimalCount > 2) {
+        toast.error(
+          "Please enter a maximum of 2 decimal places for the amount."
+        );
+        return;
+      }
     }
     // Proceed with transaction or further processing
     storeTransaction(walletAddress, amount);
@@ -70,7 +75,7 @@ export const Transactions = () => {
             Amount:
           </label>
           <input
-            type="number"
+            type="text"
             id="amount"
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             value={amount}
