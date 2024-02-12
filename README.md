@@ -19,3 +19,5 @@ Make a new .env file in the root of your directory and paste the above mentioned
 4. The Data Page has pagination feature which makes it easier for the user to access data rather than scrolling all the way down of the list.
 5. Data Page uses memoization technique to efficiently store the data fetched from firestore database.
 6. Data Page also uses the real time update feature provided by firebase, so when there is a change in the database the page is automatically reloaded and data automatically fetched and displayed.
+7. A Skeleton as a loader for the table.
+8. Toast and submit spamming is solved.
