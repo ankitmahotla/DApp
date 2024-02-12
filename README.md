@@ -21,3 +21,4 @@ Make a new .env file in the root of your directory and paste the above mentioned
 6. Data Page also uses the real time update feature provided by firebase, so when there is a change in the database the page is automatically reloaded and data automatically fetched and displayed.
 7. A Skeleton as a loader for the table.
 8. Toast and submit spamming is solved.
+9. Search functionality in Data Page.
